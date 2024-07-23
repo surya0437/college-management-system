@@ -2,11 +2,13 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\PeriodicController;
 use App\Http\Controllers\StudentsController;
+use App\Http\Controllers\BookAuthorController;
 use App\Http\Controllers\BookCategoryController;
 
 /*
@@ -66,3 +68,17 @@ Route::get('/GetBookCategory', [BookCategoryController::class, 'GetBookCategory'
 Route::post('/AddBookCategory', [BookCategoryController::class, 'AddBookCategory']);
 Route::put('/EditBookCategory/{category_id}', [BookCategoryController::class, 'EditBookCategory']);
 Route::delete('/DeleteBookCategory/{category_id}', [BookCategoryController::class, 'DeleteBookCategory']); 
+
+// Book author API Routes
+
+Route::get('/GetAuthor', [BookAuthorController::class, 'GetAuthor']);
+Route::post('/AddAuthor', [BookAuthorController::class, 'AddAuthor']);
+Route::put('/EditAuthor/{author_id}', [BookAuthorController::class, 'EditAuthor']);
+Route::delete('/DeleteAuthor/{author_id}', [BookAuthorController::class, 'DeleteAuthor']);
+
+// Book API Routes
+
+Route::get('/GetBook', [BookController::class, 'GetBook']);
+Route::post('/AddBook', [BookController::class, 'AddBook']);
+Route::put('/EditBook/{book_id}', [BookController::class, 'EditBook']);
+Route::delete('/DeleteBook/{book_id}', [BookController::class, 'DeleteBook']);
