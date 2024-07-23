@@ -22,13 +22,11 @@ class SubjectController extends Controller
             'periodic_id' => 'required|exists:periodics,periodic_id',
         ]);
 
-        $status = $request->status == "true" ? true : false;
 
         $subject = Subject::create([
             'name' => $request->name,
             'program_id' => $request->program_id,
             'periodic_id' => $request->periodic_id,
-            'status' => $status,
         ]);
 
         return response()->json(['message' => 'Subject added successfully', 'subject' => $subject], 201);

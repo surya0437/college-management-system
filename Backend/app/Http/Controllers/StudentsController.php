@@ -29,9 +29,7 @@ class StudentsController extends Controller
             'image' => 'nullable|string',
         ]);
 
-        $status = $request->status == "true" ? true : false;
         $filename = null;
-        $face = false;
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -56,8 +54,7 @@ class StudentsController extends Controller
             'date_of_birth' => $request->date_of_birth,
             'program_id' => $request->program_id,
             'image' => $filename,
-            'status' => $status,
-            'face' => $face,
+            'face' => false,
         ]);
 
         return response()->json(['message' => 'Student added successfully', 'student' => $student], 201);
@@ -81,7 +78,6 @@ class StudentsController extends Controller
             'image' => 'nullable|string',
         ]);
 
-        $status = $request->status == "true" ? true : false;
         $filename = $student->image; // Preserve current image if not updated
 
         if ($request->hasFile('image')) {
@@ -105,7 +101,6 @@ class StudentsController extends Controller
             'date_of_birth' => $request->date_of_birth,
             'program_id' => $request->program_id,
             'image' => $filename,
-            'status' => $status,
         ]);
 
         return response()->json(['message' => 'Student updated successfully', 'student' => $student], 200);

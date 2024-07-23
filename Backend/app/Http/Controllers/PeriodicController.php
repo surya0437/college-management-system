@@ -19,11 +19,10 @@ class PeriodicController extends Controller
             'name' => 'required|string|max:255|unique:periodics',
         ]);
 
-        $status = $request->status == "true" ? true : false;
 
         $periodic = Periodic::create([
             'name' => $request->name,
-            'status' => $status,
+            'status' => true,
         ]);
 
         return response()->json(['message' => 'Periodic added successfully', 'periodic' => $periodic], 201);
@@ -37,11 +36,9 @@ class PeriodicController extends Controller
             'name' => 'required|string|max:255|unique:periodic',
         ]);
 
-        $status = $request->status == "true" ? true : false;
 
         $periodic->update([
             'name' => $request->name,
-            'status' => $status,
         ]);
 
         return response()->json(['message' => 'Periodic updated successfully', 'periodic' => $periodic], 200);

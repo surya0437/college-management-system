@@ -34,9 +34,7 @@ class TeacherController extends Controller
             'face' => 'nullable|boolean',
         ]);
 
-        $status = $request->status == "true" ? true : false;
         $filename = null;
-        $face = false;
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -68,8 +66,7 @@ class TeacherController extends Controller
             'out_time' => $out_time->format('H:i'),
             // 'out_time' => $request->out_time,
             'image' => $filename,
-            'status' => $status,
-            'face' => $face,
+            'face' => false,
         ]);
 
         return response()->json(['message' => 'Teacher added successfully', 'teacher' => $teacher], 201);
@@ -97,7 +94,6 @@ class TeacherController extends Controller
             'face' => 'nullable|boolean',
         ]);
 
-        $status = $request->status == "true" ? true : false;
         $filename = $teacher->image; // Preserve current image if not updated
 
         if ($request->hasFile('image')) {
@@ -126,7 +122,6 @@ class TeacherController extends Controller
             'working_hour' => $request->working_hour,
             'out_time' => $request->out_time,
             'image' => $filename,
-            'status' => $status,
         ]);
 
         return response()->json(['message' => 'Teacher updated successfully', 'teacher' => $teacher], 200);

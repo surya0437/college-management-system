@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('periodics', function (Blueprint $table) {
             $table->id('periodic_id');
             $table->string('name')->unique();
-            $table->boolean('status');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

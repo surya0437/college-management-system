@@ -20,11 +20,9 @@ class BookCategoryController extends Controller
             'name' => 'required|string|max:255|unique:book_categories,name',
         ]);
 
-        $status = $request->status == "true" ? true : false;
 
         $BookCategory = new BookCategory();
         $BookCategory->name = $request->name;
-        $BookCategory->status = $status;
         $BookCategory->save();
 
         return response()->json(['message' => 'Book category added successfully', 'Book category' => $BookCategory], 201);
@@ -39,10 +37,7 @@ class BookCategoryController extends Controller
             'name' => 'required|string|max:255',
         ]);
 
-        $status = $request->status == "true" ? true : false;
-
         $BookCategory->name = $request->name;
-        $BookCategory->status = $status;
         $BookCategory->save();
 
         return response()->json(['message' => 'Book category updated successfully', 'Book category' => $BookCategory], 200);

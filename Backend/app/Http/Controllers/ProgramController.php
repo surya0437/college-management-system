@@ -23,11 +23,8 @@ class ProgramController extends Controller
             'name' => 'required|string|max:255|unique:programs,name',
         ]);
 
-        $status = $request->status == "true" ? true : false;
-
         $program = new Program();
         $program->name = $request->name;
-        $program->status = $status;
         $program->save();
 
         return response()->json(['message' => 'Program added successfully', 'program' => $program], 201);
@@ -42,10 +39,8 @@ class ProgramController extends Controller
             'name' => 'required|string|max:255',
         ]);
 
-        $status = $request->status == "true" ? true : false;
 
         $program->name = $request->name;
-        $program->status = $status;
         $program->save();
 
         return response()->json(['message' => 'Program updated successfully', 'program' => $program], 200);
