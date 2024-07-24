@@ -36,7 +36,7 @@ class StudentsController extends Controller
             $filename = $request->fname . '_' . rand(100000, 999999) . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('StudentImage'), $filename);
         }
-        $roll_no = 'T' . rand(100000, 999999);
+        $roll_no = 'S' . rand(100000, 999999);
         while (Students::where('roll_no', $roll_no)->exists()) {
             $roll_no = 'S' . rand(100000, 999999);
         }

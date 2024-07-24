@@ -16,8 +16,8 @@ class BookController extends Controller
     public function AddBook(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'quantity' => 'required|integer|max:10',
+            'name' => 'required|string|max:255|unique:books,name',
+            'quantity' => 'required|integer',
             'category_id' => 'exists:book_categories,category_id',
             'author_id' => 'exists:book_authors,author_id',
             'periodic_id' => 'exists:periodics,periodic_id',
@@ -39,7 +39,7 @@ class BookController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:books,name,' . $book_id . ',book_id',
-            'quantity' => 'required|integer|max:10',
+            'quantity' => 'required|integer',
             'category_id' => 'exists:book_categories,category_id',
             'author_id' => 'exists:book_authors,author_id',
             'periodic_id' => 'exists:periodics,periodic_id',
