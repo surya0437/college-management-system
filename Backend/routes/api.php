@@ -10,7 +10,9 @@ use App\Http\Controllers\PeriodicController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\BookIssueController;
 use App\Http\Controllers\BookAuthorController;
+use App\Http\Controllers\RequestBookController;
 use App\Http\Controllers\BookCategoryController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -91,3 +93,10 @@ Route::get('/GetIssuedBooksByStudent/{student_id}', [BookIssueController::class,
 Route::post('/IssueBook', [BookIssueController::class, 'IssueBook']);
 Route::put('/ReturnBook/{issue_id}', [BookIssueController::class, 'ReturnBook']);
 Route::delete('/DeleteBookIssue/{issue_id}', [BookIssueController::class, 'DeleteBookIssue']);
+
+// Book issues API Routes
+
+Route::get('/GetAllRequests', [RequestBookController::class, 'GetAllRequests']);
+Route::get('/GetRequestsByStudent/{student_id}', [RequestBookController::class, 'GetRequestByStudent']);
+Route::post('/RequestBook', [RequestBookController::class, 'RequestBook']);
+Route::put('/ApproveRequest/{requestBook_id}', [RequestBookController::class, 'ApproveRequest']);
