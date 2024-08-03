@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Teacher extends Model
+class Administration extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'teacher_id';
+    protected $primaryKey = 'administration_id';
     protected $fillable = [
-        'roll_no',
         'fname',
         'lname',
         'gender',
@@ -18,14 +17,12 @@ class Teacher extends Model
         'phone',
         'address',
         'password',
-        'date_of_birth',
-        'education',
-        'specialization',
-        'in_time',
-        'working_hour',
-        'out_time',
-        'image',
+        'role_id',
         'status',
-        'face',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id', 'role_id');
+    }
 }

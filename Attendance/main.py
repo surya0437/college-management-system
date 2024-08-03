@@ -15,13 +15,13 @@ max_images = 20
 
 def gen_frames(user_id):
     global image_counter
-    image_counter = 0
+    image_counter = 1
     video_capture = cv2.VideoCapture(0)
     if not video_capture.isOpened():
         print("Error: Could not open video device")
         return
 
-    while image_counter < max_images:
+    while image_counter <= max_images:
         success, frame = video_capture.read()
         if not success:
             print("Failed to grab frame")

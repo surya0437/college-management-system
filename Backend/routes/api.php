@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\BookIssueController;
 use App\Http\Controllers\BookAuthorController;
 use App\Http\Controllers\RequestBookController;
 use App\Http\Controllers\BookCategoryController;
+use App\Http\Controllers\AdministrationController;
 
 
 /*
@@ -64,7 +66,6 @@ Route::post('/AddSubject', [SubjectController::class, 'AddSubject']);
 Route::put('/EditSubject/{subject_id}', [SubjectController::class, 'EditSubject']);
 Route::delete('/DeleteSubject/{subject_id}', [SubjectController::class, 'DeleteSubject']);
 
-
 // Book category API Routes
 
 Route::get('/GetBookCategory', [BookCategoryController::class, 'GetBookCategory']);
@@ -100,3 +101,18 @@ Route::get('/GetAllRequests', [RequestBookController::class, 'GetAllRequests']);
 Route::get('/GetRequestsByStudent/{student_id}', [RequestBookController::class, 'GetRequestByStudent']);
 Route::post('/RequestBook', [RequestBookController::class, 'RequestBook']);
 Route::put('/ApproveRequest/{requestBook_id}', [RequestBookController::class, 'ApproveRequest']);
+
+// Roles API Routes
+
+Route::get('/GetRole', [RoleController::class, 'GetRole']);
+Route::post('/AddRole', [RoleController::class, 'AddRole']);
+Route::put('/UpdateRole/{role_id}', [RoleController::class, 'UpdateRole']);
+Route::delete('/DeleteRole/{role_id}', [RoleController::class, 'DeleteRole']);
+
+// Administrations API Routes
+
+Route::get('/GetAllAdministrations', [AdministrationController::class, 'GetAllAdministrations']);
+Route::get('/GetAdministration/{administration_id}', [AdministrationController::class, 'GetAdministration']);
+Route::post('/AddAdministration', [AdministrationController::class, 'AddAdministration']);
+Route::put('/EditAdministration/{administration_id}', [AdministrationController::class, 'EditAdministration']);
+Route::delete('/DeleteAdministration/{administration_id}', [AdministrationController::class, 'DeleteAdministration']);

@@ -26,22 +26,22 @@ class StudentsController extends Controller
             'password' => 'required|string|min:8',
             'date_of_birth' => 'required|date',
             'program_id' => 'required|exists:programs,program_id',
-            'image' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', 
         ]);
-
+    
         $filename = null;
-
+    
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = $request->fname . '_' . rand(100000, 999999) . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('StudentImage'), $filename);
         }
+    
         $roll_no = 'S' . rand(100000, 999999);
         while (Students::where('roll_no', $roll_no)->exists()) {
             $roll_no = 'S' . rand(100000, 999999);
         }
-
-
+    
         $student = Students::create([
             'roll_no' => $roll_no,
             'fname' => $request->fname,
@@ -50,15 +50,16 @@ class StudentsController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
-            'password' => bcrypt($request->password),  // Hash the password
+            'password' => bcrypt($request->password),  
             'date_of_birth' => $request->date_of_birth,
             'program_id' => $request->program_id,
             'image' => $filename,
             'face' => false,
         ]);
-
+    
         return response()->json(['message' => 'Student added successfully', 'student' => $student], 201);
     }
+
 
 
 
