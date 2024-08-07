@@ -24,6 +24,7 @@ return new class extends Migration
             $table->date('date_of_birth');
             $table->unsignedBigInteger('program_id');
             $table->string('image')->nullable();
+            $table->string('role')->default('Student');
             $table->boolean('status')->default(true);
             $table->boolean('face')->nullable();
             $table->timestamps();

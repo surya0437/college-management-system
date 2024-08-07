@@ -28,6 +28,7 @@ return new class extends Migration
             $table->integer('working_hour');
             $table->time('out_time');
             $table->string('image')->nullable();
+            $table->string('role')->default('Teacher');
             $table->boolean('status')->default(true);
             $table->boolean('face')->nullable();
             $table->timestamps();
