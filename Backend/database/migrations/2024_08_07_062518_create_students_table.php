@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('teachers', function (Blueprint $table) {
-            $table->id('teacher_id');
+        Schema::create('students', function (Blueprint $table) {
+            $table->id('student_id');
             $table->string('roll_no')->unique();
             $table->string('fname');
             $table->string('lname');
@@ -22,16 +22,16 @@ return new class extends Migration
             $table->string('address');
             $table->string('password');
             $table->date('date_of_birth');
-            $table->string('education');
-            $table->string('specialization')->nullable();
-            $table->time('in_time');
-            $table->integer('working_hour');
-            $table->time('out_time');
+            $table->unsignedBigInteger('program_id');
+            $table->unsignedBigInteger('classShift_id');
             $table->string('image')->nullable();
-            $table->string('role')->default('Teacher');
+            $table->string('role')->default('Student');
             $table->boolean('status')->default(true);
-            $table->boolean('face')->nullable();
+            $table->boolean('face')->default(false);
             $table->timestamps();
+
+            $table->foreign('program_id')->references('program_id')->on('programs')->restrictOnDelete();
+            $table->foreign('classShift_id')->references('classShift_id')->on('class_shifts')->restrictOnDelete();
         });
     }
 
@@ -40,6 +40,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('teachers');
+        Schema::dropIfExists('students');
     }
 };

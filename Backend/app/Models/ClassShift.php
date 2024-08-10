@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BookCategory extends Model
+class ClassShift extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'category_id';
+    protected $primaryKey = 'classShift_id';
     
     protected $fillable = [
         'name',
+        'in_time',
+        'out_time',
         'status',
     ];
 }

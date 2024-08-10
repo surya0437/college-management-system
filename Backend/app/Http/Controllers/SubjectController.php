@@ -35,17 +35,17 @@ class SubjectController extends Controller
     public function EditSubject(Request $request, $subject_id)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'program_id' => 'required|exists:programs,program_id',
-            'periodic_id' => 'required|exists:periodics,periodic_id',
+            'name' => 'sometimes|string|max:255',
+            'program_id' => 'sometimes|exists:programs,program_id',
+            'periodic_id' => 'sometimes|exists:periodics,periodic_id',
         ]);
 
         $subject = Subject::find($subject_id);
-        
+
         $subject->update([
-            'name' => $request->name,
-            'program_id' => $request->program_id,
-            'periodic_id' => $request->periodic_id,
+            'name' => $request->name ?? $subject->name,
+            'program_id' => $request->program_id ?? $subject->program_id,
+            'periodic_id' => $request->periodic_id ?? $subject->periodic_id,
         ]);
 
         return response()->json(['message' => 'Subject updated successfully', 'subject' => $subject], 200);

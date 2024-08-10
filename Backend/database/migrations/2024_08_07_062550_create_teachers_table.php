@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('students', function (Blueprint $table) {
-            $table->id('student_id');
+        Schema::create('teachers', function (Blueprint $table) {
+            $table->id('teacher_id');
             $table->string('roll_no')->unique();
             $table->string('fname');
             $table->string('lname');
@@ -22,14 +22,16 @@ return new class extends Migration
             $table->string('address');
             $table->string('password');
             $table->date('date_of_birth');
-            $table->unsignedBigInteger('program_id');
+            $table->string('education');
+            $table->string('specialization')->nullable();
+            $table->time('in_time');
+            $table->integer('working_hour');
+            $table->time('out_time');
             $table->string('image')->nullable();
-            $table->string('role')->default('Student');
+            $table->string('role')->default('Teacher');
             $table->boolean('status')->default(true);
-            $table->boolean('face')->nullable();
+            $table->boolean('face')->default(false);
             $table->timestamps();
-
-            $table->foreign('program_id')->references('program_id')->on('programs')->onDelete('cascade');
         });
     }
 
@@ -38,6 +40,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('students');
+        Schema::dropIfExists('teachers');
     }
 };

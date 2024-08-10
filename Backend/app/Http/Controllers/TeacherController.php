@@ -24,6 +24,7 @@ class TeacherController extends Controller
             'email' => 'required|string|email|max:255|unique:teachers',
             'phone' => 'required|string|max:20|unique:teachers',
             'address' => 'required|string|max:255',
+            'password' => 'required|string|min:8',
             'date_of_birth' => 'required|date',
             'education' => 'required|string|max:255',
             'specialization' => 'nullable|string|max:255',
@@ -58,6 +59,7 @@ class TeacherController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
+            'password' => bcrypt($request->password),
             'date_of_birth' => $request->date_of_birth,
             'education' => $request->education,
             'specialization' => $request->specialization,
@@ -77,24 +79,23 @@ class TeacherController extends Controller
         $teacher = Teacher::findOrFail($teacher_id);
 
         $request->validate([
-            'fname' => 'required|string|max:255',
-            'lname' => 'required|string|max:255',
-            'gender' => 'required|in:Male,Female,Other',
-            'email' => 'required|string|email|max:255',
-            'phone' => 'required|string|max:20',
-            'address' => 'required|string|max:255',
-            'password' => 'required|string|min:8',
-            'date_of_birth' => 'required|date',
-            'education' => 'required|string|max:255',
+            'fname' => 'sometimes|string|max:255',
+            'lname' => 'sometimes|string|max:255',
+            'gender' => 'sometimes|in:Male,Female,Other',
+            'email' => 'sometimes|string|email|max:255',
+            'phone' => 'sometimes|string|max:20',
+            'address' => 'sometimes|string|max:255',
+            'password' => 'sometimes|string|min:8',
+            'date_of_birth' => 'sometimes|date',
+            'education' => 'sometimes|string|max:255',
             'specialization' => 'nullable|string|max:255',
-            'in_time' => 'required|date_format:H:i',
-            'working_hour' => 'required|integer',
-            'out_time' => 'required|date_format:H:i',
+            'in_time' => 'sometimes|date_format:H:i',
+            'working_hour' => 'sometimes|integer',
+            'out_time' => 'sometimes|date_format:H:i',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'face' => 'nullable|boolean',
         ]);
 
-        $filename = $teacher->image; // Preserve current image if not updated
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -107,21 +108,24 @@ class TeacherController extends Controller
             }
         }
 
+
+        $in_time = Carbon::createFromFormat('H:i', $request->in_time);
+        $out_time = $in_time->copy()->addHours($request->working_hour ?? $teacher->working_hour);
+
         $teacher->update([
-            'fname' => $request->fname,
-            'lname' => $request->lname,
-            'gender' => $request->gender,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'address' => $request->address,
-            'password' => bcrypt($request->password),
-            'date_of_birth' => $request->date_of_birth,
-            'education' => $request->education,
-            'specialization' => $request->specialization,
-            'in_time' => $request->in_time,
-            'working_hour' => $request->working_hour,
-            'out_time' => $request->out_time,
-            'image' => $filename,
+            'fname' => $request->fname ?? $request->fname,
+            'lname' => $request->lname ?? $request->lname,
+            'gender' => $request->gender ?? $request->gender,
+            'email' => $request->email ?? $request->email,
+            'phone' => $request->phone ?? $request->phone,
+            'address' => $request->address ?? $request->address,
+            'date_of_birth' => $request->date_of_birth ?? $request->date_of_birth,
+            'education' => $request->education ?? $request->education,
+            'specialization' => $request->specialization ?? $request->specialization,
+            'in_time' => $request->in_time ?? $request->in_time,
+            'working_hour' => $request->working_hour ?? $teacher->working_hour,
+            'out_time' => $out_time->format('H:i'),
+            'image' => $filename ?? $teacher->image,
         ]);
 
         return response()->json(['message' => 'Teacher updated successfully', 'teacher' => $teacher], 200);

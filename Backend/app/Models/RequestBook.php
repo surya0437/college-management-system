@@ -19,7 +19,7 @@ class RequestBook extends Model
 
     public function student()
     {
-        return $this->belongsTo(Students::class, 'student_id', 'student_id');
+        return $this->belongsTo(Student::class, 'student_id', 'student_id');
     }
 
     public function book()

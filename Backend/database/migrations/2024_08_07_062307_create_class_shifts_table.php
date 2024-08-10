@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subjects', function (Blueprint $table) {
-            $table->id('subject_id');
+        Schema::create('class_shifts', function (Blueprint $table) {
+            $table->id('classShift_id');
             $table->string('name');
-            $table->unsignedBigInteger('program_id');
-            $table->unsignedBigInteger('periodic_id');
+            $table->time('in_time');
+            $table->time('out_time');
             $table->boolean('status')->default(true);
             $table->timestamps();
-
-            $table->foreign('program_id')->references('program_id')->on('programs')->onDelete('cascade');
-            $table->foreign('periodic_id')->references('periodic_id')->on('periodics')->onDelete('cascade');
         });
     }
 
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subjects');
+        Schema::dropIfExists('class_shifts');
     }
 };

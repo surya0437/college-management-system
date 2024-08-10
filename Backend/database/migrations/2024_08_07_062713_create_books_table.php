@@ -21,9 +21,9 @@ return new class extends Migration
             $table->boolean('status')->default(true);
             $table->timestamps();
 
-            $table->foreign('category_id')->references('category_id')->on('book_categories')->onDelete('cascade');
-            $table->foreign('author_id')->references('author_id')->on('book_authors')->onDelete('cascade');
-            $table->foreign('periodic_id')->references('periodic_id')->on('periodics')->onDelete('cascade');
+            $table->foreign('category_id')->references('category_id')->on('book_categories')->restrictOnDelete();
+            $table->foreign('author_id')->references('author_id')->on('book_authors')->restrictOnDelete();
+            $table->foreign('periodic_id')->references('periodic_id')->on('periodics')->restrictOnDelete();
         });
     }
 

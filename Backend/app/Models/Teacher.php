@@ -28,4 +28,8 @@ class Teacher extends Model
         'status',
         'face',
     ];
+
+    protected $hidden = [
+        'password',
+    ];
 }

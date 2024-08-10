@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class BookIssue extends Model
 {
@@ -20,7 +21,7 @@ class BookIssue extends Model
 
     public function student()
     {
-        return $this->belongsTo(Students::class, 'student_id', 'student_id');
+        return $this->belongsTo(Student::class, 'student_id', 'student_id');
     }
 
     public function book()

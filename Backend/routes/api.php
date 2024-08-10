@@ -5,16 +5,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\PeriodicController;
-use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\BookIssueController;
 use App\Http\Controllers\BookAuthorController;
+use App\Http\Controllers\ClassShiftController;
 use App\Http\Controllers\RequestBookController;
 use App\Http\Controllers\BookCategoryController;
 use App\Http\Controllers\AdministrationController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +31,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 // Programs API Routes
 
 Route::get('/GetProgram', [ProgramController::class, 'GetProgram']);
@@ -38,12 +39,19 @@ Route::post('/AddProgram', [ProgramController::class, 'AddProgram']);
 Route::put('/EditProgram/{program_id}', [ProgramController::class, 'EditProgram']);
 Route::delete('/DeleteProgram/{program_id}', [ProgramController::class, 'DeleteProgram']);
 
+// Class Shift API Routes
+
+Route::get('/GetClassShifts', [ClassShiftController::class, 'GetClassShifts']);
+Route::post('/AddClassShift', [ClassShiftController::class, 'AddClassShift']);
+Route::put('/EditClassShift/{classShift_id}', [ClassShiftController::class, 'EditClassShift']);
+Route::delete('/DeleteClassShift/{classShift_id}', [ClassShiftController::class, 'DeleteClassShift']);
+
 // Students API Routes
 
-Route::get('/GetStudent', [StudentsController::class, 'GetStudent']);
-Route::post('/AddStudent', [StudentsController::class, 'AddStudent']);
-Route::put('/EditStudent/{student_id}', [StudentsController::class, 'EditStudent']);
-Route::delete('/DeleteStudent/{student_id}', [StudentsController::class, 'DeleteStudent']);
+Route::get('/GetStudent', [StudentController::class, 'GetStudent']);
+Route::post('/AddStudent', [StudentController::class, 'AddStudent']);
+Route::put('/EditStudent/{student_id}', [StudentController::class, 'EditStudent']);
+Route::delete('/DeleteStudent/{student_id}', [StudentController::class, 'DeleteStudent']);
 
 // Teachers API Routes
 

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Students extends Model
+class Student extends Model
 {
     use HasFactory;
     protected $primaryKey = 'student_id';
@@ -20,6 +20,7 @@ class Students extends Model
         'password',
         'date_of_birth',
         'program_id',
+        'classShift_id',
         'image',
         'status',
         'face',
@@ -32,5 +33,10 @@ class Students extends Model
     public function program()
     {
         return $this->belongsTo(Program::class, 'program_id', 'program_id');
+    }
+
+    public function classShift()
+    {
+        return $this->belongsTo(ClassShift::class, 'classShift_id', 'classShift_id');
     }
 }

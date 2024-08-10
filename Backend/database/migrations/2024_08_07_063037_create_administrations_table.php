@@ -24,8 +24,7 @@ return new class extends Migration
             $table->boolean('status')->default(true);
             $table->timestamps();
 
-            $table->foreign('role_id')->references('role_id')->on('roles')->onDelete('cascade');
-
+            $table->foreign('role_id')->references('role_id')->on('roles')->restrictOnDelete();
         });
     }
 
