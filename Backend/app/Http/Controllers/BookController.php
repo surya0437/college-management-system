@@ -11,7 +11,7 @@ class BookController extends Controller
 {
     public function GetBook()
     {
-        $books = Book::with(['category', 'author'])->get();
+        $books = Book::all();
         return response()->json($books);
     }
 
@@ -20,18 +20,18 @@ class BookController extends Controller
         $request->validate([
             'name' => 'required|string|max:255|unique:books,name',
             'quantity' => 'required|integer',
-            'category_id' => 'exists:book_categories,category_id',
-            'author_id' => 'exists:book_authors,author_id',
-            'periodic_id' => 'exists:periodics,periodic_id',
+            'category' => 'sometimes|string|max:255|',
+            'author' => 'sometimes|string|max:255|',
+            'periodic' => 'sometimes|string|max:255|',
         ]);
 
 
         $book = Book::create([
             'name' => $request->name,
             'quantity' => $request->quantity,
-            'category_id' => $request->category_id,
-            'author_id' => $request->author_id,
-            'periodic_id' => $request->periodic_id,
+            'category' => $request->category,
+            'author' => $request->author,
+            'periodic' => $request->periodic,
         ]);
 
         return response()->json(['message' => 'Book added successfully', 'book' => $book], 201);
@@ -42,9 +42,9 @@ class BookController extends Controller
         $request->validate([
             'name' => 'sometimes|string|max:255|unique:books,name,' . $book_id . ',book_id',
             'quantity' => 'sometimes|integer',
-            'category_id' => 'exists:book_categories,category_id',
-            'author_id' => 'exists:book_authors,author_id',
-            'periodic_id' => 'exists:periodics,periodic_id',
+            'category' => 'sometimes|string|max:255|',
+            'author' => 'sometimes|string|max:255|',
+            'periodic' => 'sometimes|string|max:255|',
 
         ]);
 
@@ -53,9 +53,9 @@ class BookController extends Controller
         $book->update([
             'name' => $request->name ?? $book->name,
             'quantity' => $request->quantity ?? $book->quantity,
-            'category_id' => $request->category_id ?? $book->category_id,
-            'author_id' => $request->author_id ?? $book->author_id,
-            'periodic_id' => $request->periodic_id ?? $book->periodic_id,
+            'category' => $request->category ?? $book->category,
+            'author' => $request->author ?? $book->author,
+            'periodic' => $request->periodic ?? $book->periodic,
         ]);
 
         return response()->json(['message' => 'Book updated successfully', 'book' => $book], 200);

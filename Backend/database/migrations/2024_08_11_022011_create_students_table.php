@@ -23,14 +23,17 @@ return new class extends Migration
             $table->string('password');
             $table->date('date_of_birth');
             $table->unsignedBigInteger('program_id');
+            $table->unsignedBigInteger('periodic_id');
             $table->unsignedBigInteger('classShift_id');
             $table->string('image')->nullable();
+            
             $table->string('role')->default('Student');
             $table->boolean('status')->default(true);
             $table->boolean('face')->default(false);
             $table->timestamps();
 
             $table->foreign('program_id')->references('program_id')->on('programs')->restrictOnDelete();
+            $table->foreign('periodic_id')->references('periodic_id')->on('periodics')->restrictOnDelete();
             $table->foreign('classShift_id')->references('classShift_id')->on('class_shifts')->restrictOnDelete();
         });
     }

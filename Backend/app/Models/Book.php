@@ -13,21 +13,11 @@ class Book extends Model
     protected $fillable = [
         'name',
         'quantity',
-        'category_id',
-        'author_id',
+        'category',
+        'author',
         'periodic_id',
         'status'
     ];
-
-    public function category()
-    {
-        return $this->belongsTo(BookCategory::class, 'category_id', 'category_id');
-    }
-
-    public function author()
-    {
-        return $this->belongsTo(BookAuthor::class, 'author_id', 'author_id');
-    }
 
     public function periodic()
     {

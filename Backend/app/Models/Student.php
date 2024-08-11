@@ -20,6 +20,7 @@ class Student extends Model
         'password',
         'date_of_birth',
         'program_id',
+        'periodic_id',
         'classShift_id',
         'image',
         'status',
@@ -33,6 +34,11 @@ class Student extends Model
     public function program()
     {
         return $this->belongsTo(Program::class, 'program_id', 'program_id');
+    }
+
+    public function periodic()
+    {
+        return $this->belongsTo(Periodic::class, 'periodic_id', 'periodic_id');
     }
 
     public function classShift()
