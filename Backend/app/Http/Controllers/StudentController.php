@@ -29,6 +29,7 @@ class StudentController extends Controller
             'password' => 'required|string|min:8',
             'date_of_birth' => 'required|date',
             'program_id' => 'required|exists:programs,program_id',
+            'periodic_id' => 'required|exists:periodics,periodic_id',
             'classShift_id' => 'required|exists:class_shifts,classShift_id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
@@ -57,6 +58,7 @@ class StudentController extends Controller
             'password' => bcrypt($request->password),
             'date_of_birth' => $request->date_of_birth,
             'program_id' => $request->program_id,
+            'periodic_id' => $request->periodic_id,
             'classShift_id' => $request->classShift_id,
             'image' => $filename,
             'face' => false,
@@ -81,6 +83,7 @@ class StudentController extends Controller
             'address' => 'sometimes|string|max:255',
             'date_of_birth' => 'sometimes|date',
             'program_id' => 'sometimes|exists:programs,program_id',
+            'periodic_id' => 'sometimes|exists:periodics,periodic_id',
             'classShift_id' => 'sometimes|exists:class_shifts,classShift_id',
             'image' => 'nullable|string',
         ]);
@@ -106,7 +109,8 @@ class StudentController extends Controller
             'address' => $request->address ?? $student->address,
             'date_of_birth' => $request->date_of_birth ?? $student->date_of_birth,
             'program_id' => $request->program_id ?? $student->program_id,
-            'program_id' => $request->classShift_id ?? $student->classShift_id,
+            'periodic_id' => $request->periodic_id ?? $student->periodic_id,
+            'classShift_id' => $request->classShift_id ?? $student->classShift_id,
             'image' => $filename ?? $student->image,
         ]);
 
