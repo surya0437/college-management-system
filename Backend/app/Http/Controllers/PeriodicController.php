@@ -31,19 +31,21 @@ class PeriodicController extends Controller
 
     public function EditPeriodic(Request $request, $periodic_id)
     {
+        // Use findOrFail to automatically handle cases where the periodic is not found
         $periodic = Periodic::findOrFail($periodic_id);
 
+        // Validate the request
         $request->validate([
-            'name' => 'sometimes|string|max:255|unique:periodics',
+            'name' => 'sometimes|string|max:255|unique:periodics,name,' . $periodic_id . ',periodic_id',
         ]);
 
-
-        $periodic->update([
-            'name' => $request->name ?? $periodic->name,
-        ]);
-
-        return response()->json(['message' => 'Periodic updated successfully', 'periodic' => $periodic], 200);
+        // Update the periodic record
+        $periodic->name = $request->name ?? $periodic->name;
+        $periodic->save();
+        // Return a success response
+        return response()->json(['mess;age' => 'Periodic updated successfully', 'periodic' => $periodic], 200);
     }
+
 
     // public function DeletePeriodic($periodic_id)
     // {
@@ -67,7 +69,7 @@ class PeriodicController extends Controller
         try {
             // Attempt to find the periodic record by ID
             $periodic = Periodic::findOrFail($periodic_id);
-            
+
             // Delete the periodic record
             $periodic->delete();
 

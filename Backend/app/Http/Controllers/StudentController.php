@@ -12,8 +12,9 @@ class StudentController extends Controller
 
     public function GetStudent()
     {
-        $students = Student::all();
-        return response()->json($students);
+        $students = Student::with(['program', 'periodic', 'classShift'])->get();
+
+        return response()->json($students, 200);
     }
 
     public function AddStudent(Request $request)

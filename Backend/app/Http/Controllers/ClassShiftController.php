@@ -55,7 +55,7 @@ class ClassShiftController extends Controller
      * @param  int  $classShift_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($classShift_id): JsonResponse
+    public function DeleteClassShift($classShift_id): JsonResponse
     {
         try {
             // Attempt to find the class shift by ID
